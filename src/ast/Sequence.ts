@@ -29,6 +29,10 @@ export class Sequence implements Stmt {
   }
 
   evaluate(state: State): State {
-    return undefined;
+    state=this.statements.reduce((state:State,stmt:Stmt) => stmt.evaluate(state),state);
+    return state;
   }
+
+
+  
 }

@@ -22,6 +22,12 @@ export class WhileDo implements Stmt {
   }
 
   evaluate(state: State): State {
-    return undefined;
+    if (typeof this.cond.evaluate(state) === "boolean") {
+      while(typeof this.cond.evaluate(state)== "boolean" && this.cond.evaluate(state)){
+        state=this.body.evaluate(state);
+      }
+      return state;
+    }
+    throw new EvalError("Error al evaluar la exprexion: debe ser de tipo booleana");
   }
 }

@@ -24,6 +24,9 @@ export class IfThenElse implements Stmt {
   }
 
   evaluate(state: State): State {
-    return undefined;
+    if (typeof this.cond.evaluate(state) === "boolean") {
+      return this.cond ? this.thenBody.evaluate(state):this.elseBody.evaluate(state);
+    }
+    throw new EvalError("Error al evaluar la exprexion: debe ser de tipo booleana");
   }
 }
