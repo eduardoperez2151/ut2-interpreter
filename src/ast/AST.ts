@@ -15,6 +15,7 @@ export * from './Division';
 export * from './Numeral';
 export * from './Substraction';
 export * from './Variable';
+export * from './IfElse';
 
 // BExp
 export * from './CompareEqual';

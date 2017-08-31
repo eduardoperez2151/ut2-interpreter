@@ -23,7 +23,8 @@ import {
   Substraction,
   TruthValue,
   Variable,
-  WhileDo
+  WhileDo,
+  IfElse
 } from '../ast/AST';
 
 import { tokens } from './Tokens';
@@ -54,6 +55,7 @@ stmtelse ->
 exp ->
     exp "&&" comp           {% ([lhs, , rhs]) => (new Conjunction(lhs, rhs)) %}
   | exp "||" comp           {% ([lhs, , rhs]) => (new Disjunction(lhs, rhs)) %}
+  | comp "if" exp "else" comp   {% ([lhs, ,cexp, ,rhs]) => (new IfElse(lhs,cexp,rhs)) %}
   | comp                    {% id %}
 
 comp ->
