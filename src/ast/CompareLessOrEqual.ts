@@ -23,6 +23,11 @@ export class CompareLessOrEqual implements Exp {
   }
 
   evaluate(state: State): any {
-    return undefined;
+    var lres = this.lhs.evaluate(state);
+    var rres = this.rhs.evaluate(state);
+    if (typeof lres === "boolean" &&  typeof rres === "boolean"){
+      return lres <= rres;
+    }
+    throw new Error("Error de tipos.");
   }
 }

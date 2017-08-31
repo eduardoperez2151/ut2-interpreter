@@ -21,6 +21,10 @@ export class Negation implements Exp {
   }
 
   evaluate(state: State): any {
-    return undefined;
+    var res = this.exp.evaluate(state);
+    if (typeof res === "boolean" ){
+      return  !res;
+    }
+    throw new Error("Error de tipos.");
   }
 }
