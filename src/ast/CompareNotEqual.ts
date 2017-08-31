@@ -28,6 +28,9 @@ export class CompareNotEqual implements Exp {
     if (typeof lres === "boolean" &&  typeof rres === "boolean"){
       return lres != rres;
     }
+    if (typeof lres === "number" &&  typeof rres === "number"){
+      return lres == rres;
+    }
     throw new Error("Error de tipos.");
   }
 }
