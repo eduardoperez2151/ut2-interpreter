@@ -19,6 +19,8 @@ import {
   Division,
   Negation,
   Numeral,
+  String,
+  LengthExp,
   Sequence,
   Substraction,
   TruthValue,
@@ -53,10 +55,11 @@ stmtelse ->
 # Expressions
 
 exp ->
-    exp "&&" comp           {% ([lhs, , rhs]) => (new Conjunction(lhs, rhs)) %}
-  | exp "||" comp           {% ([lhs, , rhs]) => (new Disjunction(lhs, rhs)) %}
-  | comp "if" exp "else" comp   {% ([lhs, ,cexp, ,rhs]) => (new IfElse(lhs,cexp,rhs)) %}
-  | comp                    {% id %}
+    exp "&&" comp             {% ([lhs, , rhs]) => (new Conjunction(lhs, rhs)) %}
+  | exp "||" comp             {% ([lhs, , rhs]) => (new Disjunction(lhs, rhs)) %}
+  | comp "if" exp "else" comp {% ([lhs, ,cexp, ,rhs]) => (new IfElse(lhs,cexp,rhs)) %}
+  | "length" "(" exp ")"      {% ([, exp]) => (new LengthExp(exp)) %}
+  | comp                      {% id %}
 
 comp ->
     comp "==" addsub        {% ([lhs, , rhs]) => (new CompareEqual(lhs, rhs)) %}
@@ -87,6 +90,7 @@ value ->
   | "true"                  {% () => (new TruthValue(true)) %}
   | "false"                 {% () => (new TruthValue(false)) %}
   | identifier              {% ([id]) => (new Variable(id)) %}
+  | string                  {% ([id]) => (new String(id)) %}
 
 
 # Atoms
@@ -98,3 +102,6 @@ number ->
     %integer                {% ([id]) => (id.value) %}
   | %hex                    {% ([id]) => (id.value) %}
   | %float                  {% ([id]) => (id.value) %}
+
+string ->
+    %string                {% ([id]) => (id.value) %}
