@@ -13,6 +13,7 @@ import {
   CompareGreat,
   Conjunction,
   Disjunction,
+  DoWhile,
   IfThenElse,
   IfThen,
   Multiplication,
@@ -50,6 +51,7 @@ stmtelse ->
     identifier "=" exp ";"                {% ([id, , exp, ]) => (new Assignment(id, exp)) %}
   | "{" stmt:* "}"                        {% ([, statements, ]) => (new Sequence(statements)) %}
   | "while" exp "do" stmt                 {% ([, cond, , body]) => (new WhileDo(cond, body)) %}
+  | "do" stmt "while" exp                 {% ([, body, , cond]) => (new DoWhile(body, cond)) %}
   | "if" exp "then" stmtelse "else" stmt  {% ([, cond, , thenBody, , elseBody]) => (new IfThenElse(cond, thenBody, elseBody)) %}
 
 
@@ -59,7 +61,7 @@ exp ->
     exp "&&" comp               {% ([lhs, , rhs]) => (new Conjunction(lhs, rhs)) %}
   | exp "||" comp               {% ([lhs, , rhs]) => (new Disjunction(lhs, rhs)) %}
   | comp "if" exp "else" comp   {% ([lhs, ,cexp, ,rhs]) => (new IfElse(lhs,cexp,rhs)) %}
- 
+
   | exp "[" comp "]"            {% ([exp, ,index,]) => (new Index(exp,index)) %}
   | comp                        {% id %}
 
