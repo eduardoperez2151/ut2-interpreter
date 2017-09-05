@@ -29,7 +29,7 @@ export class CompareGreatOrEqual implements Exp {
       return lres >= rres;
     }
     if (typeof lres === "number" &&  typeof rres === "number"){
-      return lres == rres;
+      return lres >= rres;
     }
     throw new Error("Error de tipos.");
   }

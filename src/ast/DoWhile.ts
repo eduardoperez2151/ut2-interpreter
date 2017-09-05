@@ -2,26 +2,27 @@ import { Exp, Stmt } from './ASTNode';
 import { State } from '../interpreter/State';
 
 /**
-  Representación de las iteraciones while-do.
+  Representación de las iteraciones Do-While.
 */
-export class WhileDo implements Stmt {
+export class DoWhile implements Stmt {
   cond: Exp;
   body: Stmt;
 
-  constructor(cond: Exp, body: Stmt) {
+  constructor(body: Stmt, cond: Exp) {
     this.cond = cond;
     this.body = body;
   }
 
   toString(): string {
-    return `WhileDo(${this.cond.toString()}, ${this.body.toString()})`;
+    return `DoWhile(${this.body.toString()}, ${this.cond.toString()})`;
   }
 
   unparse(): string {
-    return `while ${this.cond.unparse()} do { ${this.body.unparse()} }`;
+    return `do ${this.body.unparse()} while { ${this.cond.unparse()} }`;
   }
 
   evaluate(state: State): State {
+    state=this.body.evaluate(state);
     if (typeof this.cond.evaluate(state) === "boolean") {
       while(typeof this.cond.evaluate(state) === "boolean" && this.cond.evaluate(state)){
         state=this.body.evaluate(state);
