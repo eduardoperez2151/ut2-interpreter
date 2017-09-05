@@ -59,7 +59,7 @@ exp ->
     exp "&&" comp               {% ([lhs, , rhs]) => (new Conjunction(lhs, rhs)) %}
   | exp "||" comp               {% ([lhs, , rhs]) => (new Disjunction(lhs, rhs)) %}
   | comp "if" exp "else" comp   {% ([lhs, ,cexp, ,rhs]) => (new IfElse(lhs,cexp,rhs)) %}
-  | "length" "(" exp ")"        {% ([, ,exp,]) => (new LengthExp(exp)) %}
+ 
   | exp "[" comp "]"            {% ([exp, ,index,]) => (new Index(exp,index)) %}
   | comp                        {% id %}
 
@@ -89,6 +89,7 @@ neg ->
 value ->
     "(" exp ")"             {% ([, exp, ]) => (exp) %}
   | number                  {% ([num]) => (new Numeral(num)) %}
+  | "length" "(" addsub ")"        {% ([, ,exp,]) => (new LengthExp(exp)) %}
   | "true"                  {% () => (new TruthValue(true)) %}
   | "false"                 {% () => (new TruthValue(false)) %}
   | identifier              {% ([id]) => (new Variable(id)) %}

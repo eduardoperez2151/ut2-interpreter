@@ -28,6 +28,6 @@ export class Addition implements Exp {
     if (typeof lres === "number" &&  typeof rres === "number"){
       return lres + rres;
     }
-    throw new Error("Error de tipos.");
+    throw new Error("Error de tipos: "+ (typeof lres) +" + "+  (typeof rres));
   }
 }
