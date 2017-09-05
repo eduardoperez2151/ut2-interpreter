@@ -101,9 +101,9 @@ identifier ->
     %identifier             {% ([id]) => (id.value) %}
 
 number ->
-    %integer                {% ([id]) => (id.value) %}
-  | %hex                    {% ([id]) => (id.value) %}
-  | %float                  {% ([id]) => (id.value) %}
+    %integer                {% ([id]) => (parseInt(id.value)) %}
+  | %hex                    {% ([id]) => (parseInt(id.value)) %}
+  | %float                  {% ([id]) => (parseFloat(id.value)) %}
 
 string ->
     %string                {% ([id]) => (id.value) %}
