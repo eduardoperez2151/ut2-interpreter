@@ -4,12 +4,12 @@ import { State } from '../interpreter/State';
 /**
   Representación de String.
 */
-export class String implements Exp {
+export class Literal implements Exp {
 
   value: string;
 
   constructor(value: string) {
-    this.value = value;
+    this.value = JSON.parse(value);
   }
 
   toString(): string {

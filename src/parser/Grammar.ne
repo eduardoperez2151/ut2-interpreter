@@ -19,7 +19,7 @@ import {
   Division,
   Negation,
   Numeral,
-  String,
+  Literal,
   LengthExp,
   Sequence,
   Substraction,
@@ -93,7 +93,7 @@ value ->
   | "true"                  {% () => (new TruthValue(true)) %}
   | "false"                 {% () => (new TruthValue(false)) %}
   | identifier              {% ([id]) => (new Variable(id)) %}
-  | string                  {% ([id]) => (new String(id)) %}
+  | string                  {% ([id]) => (new Literal(id)) %}
 
 
 # Atoms

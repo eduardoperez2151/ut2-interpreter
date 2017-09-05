@@ -13,7 +13,7 @@ export * from './Addition';
 export * from './Multiplication';
 export * from './Division';
 export * from './Numeral';
-export * from './String';
+export * from './Literal';
 export * from './LengthExp';
 export * from './Substraction';
 export * from './Variable';

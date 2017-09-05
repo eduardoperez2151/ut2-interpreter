@@ -23,7 +23,7 @@ export class IfElse implements  Exp {
     return `IfElse(${this.lhs.unparse()},if ${this.cexp.unparse()} else  ${this.rhs.unparse()})`;
   }
 
-  evaluate(state: State): State {
+  evaluate(state: State): any {
     if (typeof this.cexp.evaluate(state) === "boolean") {
         return this.cexp.evaluate(state) ? this.lhs.evaluate(state):this.rhs.evaluate(state);
     }
