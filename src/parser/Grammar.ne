@@ -26,7 +26,8 @@ import {
   TruthValue,
   Variable,
   WhileDo,
-  IfElse
+  IfElse,
+  Index
 } from '../ast/AST';
 
 import { tokens } from './Tokens';
@@ -55,11 +56,12 @@ stmtelse ->
 # Expressions
 
 exp ->
-    exp "&&" comp             {% ([lhs, , rhs]) => (new Conjunction(lhs, rhs)) %}
-  | exp "||" comp             {% ([lhs, , rhs]) => (new Disjunction(lhs, rhs)) %}
-  | comp "if" exp "else" comp {% ([lhs, ,cexp, ,rhs]) => (new IfElse(lhs,cexp,rhs)) %}
-  | "length" "(" exp ")"      {% ([, exp]) => (new LengthExp(exp)) %}
-  | comp                      {% id %}
+    exp "&&" comp               {% ([lhs, , rhs]) => (new Conjunction(lhs, rhs)) %}
+  | exp "||" comp               {% ([lhs, , rhs]) => (new Disjunction(lhs, rhs)) %}
+  | comp "if" exp "else" comp   {% ([lhs, ,cexp, ,rhs]) => (new IfElse(lhs,cexp,rhs)) %}
+  | "length" "(" exp ")"        {% ([, ,exp,]) => (new LengthExp(exp)) %}
+  | exp "[" comp "]"            {% ([exp, ,index,]) => (new Index(exp,index)) %}
+  | comp                        {% id %}
 
 comp ->
     comp "==" addsub        {% ([lhs, , rhs]) => (new CompareEqual(lhs, rhs)) %}

@@ -2,7 +2,7 @@ import { Exp } from './ASTNode';
 import { State } from '../interpreter/State';
 
 /**
-  Representación de constantes numéricas o numerales.
+  Representación de String.
 */
 export class String implements Exp {
 
@@ -21,6 +21,6 @@ export class String implements Exp {
   }
 
   evaluate(state: State): any {
-    this.value === null;
+    return this.value;
   }
 }

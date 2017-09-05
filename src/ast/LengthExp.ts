@@ -9,6 +9,7 @@ export class LengthExp implements  Exp {
 
   constructor(exp:Exp) {
     this.exp = exp;
+    console.log(exp);
   }
 
   toString(): string {

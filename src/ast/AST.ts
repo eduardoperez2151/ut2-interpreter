@@ -18,6 +18,8 @@ export * from './LengthExp';
 export * from './Substraction';
 export * from './Variable';
 export * from './IfElse';
+export * from './Index';
+
 
 // BExp
 export * from './CompareEqual';
