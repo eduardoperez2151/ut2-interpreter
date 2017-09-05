@@ -27,6 +27,7 @@ import {
   TruthValue,
   Variable,
   WhileDo,
+  WhileDoElse,
   IfElse,
   Index
 } from '../ast/AST';
@@ -48,11 +49,12 @@ stmt ->
   | "if" exp "then" stmt                  {% ([, cond, , thenBody]) => (new IfThen(cond, thenBody)) %}
 
 stmtelse ->
-    identifier "=" exp ";"                {% ([id, , exp, ]) => (new Assignment(id, exp)) %}
-  | "{" stmt:* "}"                        {% ([, statements, ]) => (new Sequence(statements)) %}
-  | "while" exp "do" stmt                 {% ([, cond, , body]) => (new WhileDo(cond, body)) %}
-  | "do" stmt "while" exp                 {% ([, body, , cond]) => (new DoWhile(body, cond)) %}
-  | "if" exp "then" stmtelse "else" stmt  {% ([, cond, , thenBody, , elseBody]) => (new IfThenElse(cond, thenBody, elseBody)) %}
+    identifier "=" exp ";"                  {% ([id, , exp, ]) => (new Assignment(id, exp)) %}
+  | "{" stmt:* "}"                          {% ([, statements, ]) => (new Sequence(statements)) %}
+  | "while" exp "do" stmt                   {% ([, cond, , body]) => (new WhileDo(cond, body)) %}
+  | "while" exp "do" stmt "else" stmt       {% ([, cond, , doBody, ,elseBody]) => (new WhileDoElse(cond, doBody, elseBody)) %}
+  | "do" stmt "while" exp                   {% ([, body, , cond]) => (new DoWhile(body, cond)) %}
+  | "if" exp "then" stmtelse "else" stmt    {% ([, cond, , thenBody, , elseBody]) => (new IfThenElse(cond, thenBody, elseBody)) %}
 
 
 # Expressions
