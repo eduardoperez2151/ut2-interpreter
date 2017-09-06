@@ -21,7 +21,7 @@ export * from './Substraction';
 export * from './Variable';
 export * from './IfElse';
 export * from './Index';
-
+export * from './StringNumberConcat';
 
 // BExp
 export * from './CompareEqual';
