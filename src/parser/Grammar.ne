@@ -29,8 +29,7 @@ import {
   WhileDo,
   WhileDoElse,
   IfElse,
-  Index,
-  StringNumberConcat
+  Index
 } from '../ast/AST';
 
 import { tokens } from './Tokens';
@@ -65,7 +64,6 @@ exp ->
   | exp "||" comp               {% ([lhs, , rhs]) => (new Disjunction(lhs, rhs)) %}
   | comp "if" exp "else" comp   {% ([lhs, ,cexp, ,rhs]) => (new IfElse(lhs,cexp,rhs)) %}
   | exp "[" comp "]"            {% ([exp, ,index,]) => (new Index(exp,index)) %}
-  | exp "+" addsub              {% ([str, , num]) => (new StringNumberConcat(str, num)) %}
   | comp                        {% id %}
 
 comp ->

@@ -25,9 +25,6 @@ export class Addition implements Exp {
   evaluate(state: State): any {
     var lres = this.lhs.evaluate(state);
     var rres = this.rhs.evaluate(state);
-    if (typeof lres === "number" &&  typeof rres === "number"){
-      return lres + rres;
-    }
-    throw new Error("Error de tipos: "+ (typeof lres) +" + "+  (typeof rres));
+    return lres + rres;
   }
 }

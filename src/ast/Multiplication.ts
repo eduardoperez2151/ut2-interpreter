@@ -25,8 +25,12 @@ export class Multiplication implements Exp {
   evaluate(state: State): any {
     var lres = this.lhs.evaluate(state);
     var rres = this.rhs.evaluate(state);
-    if (typeof lres === "number" &&  typeof rres === "number"){
-      return lres * rres;
+    if (typeof lres === "number"){
+      if (typeof rres === "number" ){
+        return lres * rres;
+      }else{
+        return new Array(lres+1).join(rres+ " ");
+      }
     }
     throw new Error("Error de tipos.");
   }
